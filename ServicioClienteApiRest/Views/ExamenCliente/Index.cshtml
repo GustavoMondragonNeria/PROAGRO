@@ -1,0 +1,139 @@
+﻿@using ServicioWebDominio
+@{
+    Layout = null;
+
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>PROAGRO</title>
+
+
+        <link rel="icon" type="image/png" href="~/Imagenes/PROAGRO.png" sizes="32x32" />
+        @*<img src="~/Imagenes/PROAGRO.png" />*@
+        <link href="../Content/Registro.css" rel="stylesheet" />
+        <link href="~/Content/Contenido/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+        <!-- Theme CSS -->
+        <link href="~/Content/Contenido/stylesheets/theme.css" rel="stylesheet" />
+        <!-- Skin CSS -->
+        <link href="~/Content/Contenido/stylesheets/skins/default.css" rel="stylesheet" />
+        <!-- Theme Custom CSS -->
+        <link href="~/Content/Contenido/stylesheets/theme-custom.css" rel="stylesheet" />
+        <link href="../Content/NuevoMenu.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <section class="body">
+                @{
+                    //var usuario = (ServicioWebDominio.UsuarioExt)HttpContext.Current.Session["User"];
+                    //var nombre = usuario.Nombre;
+                    <!-- start: header -->
+                    @Html.Partial("_Layout_SuperUsuario")
+                    <!-- end: header -->
+
+                    <div class="inner-wrapper">
+                        <!-- start: sidebar -->
+                        @Html.Partial("_Layout_Sider")
+                        <!-- end: sidebar -->
+
+                        <section role="main" class="content-body">
+                            <header class="page-header">
+                                @{
+                                    UsuarioExt u = (UsuarioExt)Session["User"];
+                                    <h2>BIENVENIDO ( @u.Nombre) AL SISTEMA DE SEGUROS PROAGRO </h2>
+                                }
+                                <div class="right-wrapper pull-right">
+                                </div>
+                            </header>
+
+
+
+                            <div class="col-md-6 col-lg-12 col-xl-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-12 col-xl-6">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-6 col-xl-6">
+                                                <section class="panel panel-featured-left panel-featured-primary ">
+                                                    <div class="panel-body">
+                                                        <div class="widget-summary">
+                                                            <div class="widget-summary-col widget-summary-col-icon">
+                                                                <div>
+                                                                    @{
+                                                                        UsuarioExt e = (UsuarioExt)Session["User"];
+                                                                        <a href="../ExamenCliente/ListaGeorreferenciass/@e.idUsuario"><img src="../Imagenes/PROAGRO.png" class="img-circle" height="100" /></a>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-summary-col">
+                                                                <div class="summary">
+                                                                    <h4 class="title">GEORREFERENCIAS</h4>
+                                                                    <div class="info">
+                                                                        <strong class="amount"></strong>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <div class="col-md-12 col-lg-6 col-xl-6">
+                                                <section class="panel panel-featured-left panel-featured-primary ">
+                                                    <div class="panel-body">
+                                                        <div class="widget-summary">
+                                                            <div class="widget-summary-col widget-summary-col-icon">
+                                                                <div>
+                                                                    <a href="../ExamenCliente/AgregarUsuarios"><img src="../Imagenes/PROAGRO.png" class="img-circle" height="100" /></a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="widget-summary-col">
+                                                                <div class="summary">
+                                                                    <h4 class="title">AGREGAR USUARIO</h4>
+                                                                    <div class="info">
+                                                                        <strong class="amount"></strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+
+                }
+
+               
+            </section>
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <!-- Head Libs -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="https://kit.fontawesome.com/ed14086312.js"></script>
+            <script src="../Content/Contenido/vendor/bootstrap/js/bootstrap.js"></script>
+            <script src="../Content/Contenido/vendor/nanoscroller/nanoscroller.js"></script>
+            <script src="../Content/Contenido/vendor/modernizr/modernizr.js"></script>
+            <script src="../Content/Contenido/javascripts/theme.js"></script>
+
+            <script>
+                function openNav() {
+                    document.getElementById("mySidebar").style.width = "250px";
+                    document.getElementById("main").style.marginLeft = "250px";
+                }
+
+                function closeNav() {
+                    document.getElementById("mySidebar").style.width = "0";
+                    document.getElementById("main").style.marginLeft = "0";
+                }
+            </script>
+        </div>
+    </body>
+</html>
+
+}

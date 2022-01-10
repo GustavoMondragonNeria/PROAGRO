@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PROAGROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="idEstados" />
+    </Key>
+    <Property Name="idEstados" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
+    <Property Name="Abreviacion" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Georreferencias">
+    <Key>
+      <PropertyRef Name="idGeorreferencia" />
+    </Key>
+    <Property Name="idGeorreferencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+    <Property Name="Latitud" Type="float" Nullable="false" />
+    <Property Name="Longitud" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idEstado" Type="int" Nullable="false" />
+    <Property Name="fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Contraseña" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fecha_Nacimiento" Type="datetime" Nullable="false" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ACTIVO" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Georreferencias_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Georreferencias" Type="Self.Georreferencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="idEstados" />
+      </Principal>
+      <Dependent Role="Georreferencias">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Permisos_Estados">
+    <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+    <End Role="Permisos" Type="Self.Permisos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estados">
+        <PropertyRef Name="idEstados" />
+      </Principal>
+      <Dependent Role="Permisos">
+        <PropertyRef Name="idEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Permisos_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Permisos" Type="Self.Permisos" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Permisos">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="spListaGeorreferencias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO" />
+  <Function Name="spUbicacionesGeorreferenciasPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO">
+    <Parameter Name="usuario" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="PROAGROModelStoreContainer">
+    <EntitySet Name="Estados" EntityType="Self.Estados" Schema="PROAGRO" store:Type="Tables" />
+    <EntitySet Name="Georreferencias" EntityType="Self.Georreferencias" Schema="PROAGRO" store:Type="Tables" />
+    <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="PROAGRO" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="PROAGRO" store:Type="Tables" />
+    <AssociationSet Name="FK_Georreferencias_Estados" Association="Self.FK_Georreferencias_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Georreferencias" EntitySet="Georreferencias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Permisos_Estados" Association="Self.FK_Permisos_Estados">
+      <End Role="Estados" EntitySet="Estados" />
+      <End Role="Permisos" EntitySet="Permisos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Permisos_Usuarios" Association="Self.FK_Permisos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Permisos" EntitySet="Permisos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

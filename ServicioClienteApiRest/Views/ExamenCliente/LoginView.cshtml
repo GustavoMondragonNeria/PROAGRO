@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>PROAGRO</title>
+        <link rel="icon" type="favicon-coast.png" href="../Imagenes/PROAGRO.png" sizes="228×228" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="../Content/estiloLogin/CabezaraLogin.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+        <!--===============================================================================================-->
+        <link href="../Content/Sesion/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../Content/Sesion/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+        <!--===============================================================================================-->
+        <link href="../Content/Sesion/vendor/animate/animate.css" rel="stylesheet" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../Content/Sesion/vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../Content/Sesion/vendor/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../Content/Sesion/css/util.css">
+        <link rel="stylesheet" type="text/css" href="../Content/Sesion/css/main.css">
+        <!--===============================================================================================-->
+    </head>
+    <body>
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('../Imagenes/ae10ea2d163d7722b4cbee32ed97fed3_w1000.jpg');">
+                <div class="wrap-login100 p-t-190 p-b-30">
+                    <center>
+                        <div style="color:green">
+                            @ViewBag.Message
+                        </div>
+                        <div style="color:red">
+                            @ViewBag.Error
+                        </div>
+                    </center>
+                    <div class="login100-form-avatar">
+                        <img src="../Imagenes/PROAGRO.png" class="img-circle">
+                    </div>
+                    <span class="login100-form-title p-t-20 p-b-45">
+                    </span>
+                    <div class="wrap-input100 validate-input m-b-10">
+                        <input class="input100" type="text" name="NOMBRE_ADMINISTRADOR" placeholder="USUARIO" id="txtUsuario">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input m-b-10">
+                        <input class="input100" type="password" name="CONTRASENA" placeholder="CONTRASEÑA" id="txtPassword">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+                    <div class="container-login100-form-btn p-t-10">
+                        <button id="btnIngresar" class="btn btn-lg btn-primary btn-block"><i class="fa fa-sign-in"></i> Login</button>
+                    </div>
+                    <br />
+                    <input type="hidden" name="idUsuario" value="" id="txtID_USUARIO" />
+                    <input type="hidden" name="Fecha_Nacimiento" value="" id="txtFECHA_NACIMIENTO" />
+                    <input type="hidden" name="rfc" value="" id="txtRFC" />
+                    <input type="hidden" name="idUsuario" value="" id="txtID_USUARIO" />
+                </div>
+            </div>
+        </div>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="~/JAVASCRIPT/LoginAcceso.js"></script>
+    </body>
+</html>
+}

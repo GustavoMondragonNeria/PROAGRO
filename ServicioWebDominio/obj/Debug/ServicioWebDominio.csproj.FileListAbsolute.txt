@@ -1,0 +1,6 @@
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\bin\Debug\ServicioWebDominio.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\bin\Debug\ServicioWebDominio.pdb
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\obj\Debug\ServicioWebDominio.csproj.CoreCompileInputs.cache
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\obj\Debug\ServicioWebDominio.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\obj\Debug\ServicioWebDominio.pdb
+C:\Users\gusta\source\repos\SolServicioApiRest\ServicioWebDominio\obj\Debug\ServicioWebDominio.csproj.AssemblyReference.cache

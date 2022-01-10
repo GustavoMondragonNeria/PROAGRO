@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="582482e2d6b4444988be465a7d5290e8" Name="Diagram1">
+        <EntityTypeShape EntityType="PROAGROModel.Estados" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROAGROModel.Georreferencias" Width="1.5" PointX="5.375" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PROAGROModel.Usuarios" Width="1.5" PointX="4.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="PROAGROModel.FK_Georreferencias_Estados" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PROAGROModel.Permisos" Width="1.5" PointX="6.5" PointY="5.625" />
+        <AssociationConnector Association="PROAGROModel.FK_Permisos_Estados" />
+        <AssociationConnector Association="PROAGROModel.FK_Permisos_Usuarios" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,114 @@
+﻿@{
+    Layout = null;
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <!-- Mobile Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PROAGRO</title>
+
+        <link rel="icon" type="image/png" href="../Imagenes/PROAGRO.png" sizes="32x32" />
+        <link href="../Content/Registro.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../Content/Contenido/vendor/bootstrap/css/bootstrap.css" />
+        <!-- Theme CSS -->
+        <link rel="stylesheet" href="../Content/Contenido/stylesheets/theme.css" />
+        <!-- Skin CSS -->
+        <link rel="stylesheet" href="../Content/Contenido/stylesheets/skins/default.css" />
+        <!-- Theme Custom CSS -->
+        <link rel="stylesheet" href="../Content/Contenido/stylesheets/theme-custom.css">
+        <link href="../Content/NuevoMenu.css" rel="stylesheet" />
+
+        <style>
+            label {
+                color: black;
+            }
+
+            #algo {
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <section class="body">
+                <!-- start: header -->
+                @Html.Partial("_Layout_SuperUsuario")
+                <!-- end: header -->
+
+                <div class="inner-wrapper">
+                    <!-- start: sidebar -->
+                    <!-- end: sidebar -->
+
+                    <section role="main" class="content-body">
+                        <header class="page-header">
+                            <h2>BIENVENIDO AL SISTEMA DE PROAGRO </h2>
+                            <div class="right-wrapper pull-right">
+                            </div>
+                        </header>
+                        <div class="col-md-14">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                    </div>
+                                    <h2 class="panel-title">REGISTRO DE USUARIOS</h2>
+
+                                    <p class="panel-subtitle">
+                                        FAVOR DE LLENAR LAS CREDENCIALES ¡GRACIAS!.<br />
+                                    </p>
+                                </header>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>NOMBRE<i style="color:red">*</i></label>
+                                                <input style="text-transform: uppercase;" type="text" class="form-control" placeholder="Ej. JAUN PANTOJA" name="NOMBRE" id="txtNOMBRE" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>CONTRASEÑA<i style="color:red">*</i></label>
+                                            <input type="password" class="form-control" name="CONTRASEÑA" id="txtCONTRASEÑA" required />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>RFC<i style="color:red">*</i></label>
+                                            <input type="text" class="form-control" name="CONTRASEÑA" id="txtRFC" required />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label class="control-label">ESTADO:<i style="color:red">&nbsp;&nbsp;*</i></label>
+                                            <select class="form-control" placeholder="" name="estado" id="txtESTADO" required>
+                                                <option>[SELECCIONAR]</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label>FECHA ALTA <i style="color: red">*</i></label>
+                                            <input type="datetime-local" class="form-control" name="FECHAALT" id="txtFECHA_ALTA" required />
+                                        </div>
+                                        <input type="hidden" class="form-control" name="activo" id="txtACTIVO" />
+                                    </div>
+                                </div>
+                            </section>
+                            <button type="submit" class="btn btn-success btn-responsive" id="btnInsertar"><i class="fas fa-check fa-1x"></i>&nbsp;&nbsp;INGRESAR</button>
+                            <a href="../ExamenCliente/Index" class="btn  btn-info btn-responsive"><i class="fas fa-backward fa-1x"></i>&nbsp;&nbsp;REGRESAR</a>
+                            <a href="../ExamenCliente/TablaUsuarios" class="btn  btn-warning btn-responsive"><i class="fas fa-eye fa-1x"></i>&nbsp;&nbsp;CONSULTAR TABLA</a>
+                        </div>
+
+                    </section>
+                </div>
+
+            </section>
+            <script src="https://kit.fontawesome.com/cde0596750.js" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            <!-- Vendor -->
+            <script src="../Content/Contenido/vendor/bootstrap/js/bootstrap.js"></script>
+            <script src="../Content/Contenido/vendor/nanoscroller/nanoscroller.js"></script>
+            <script src="../Content/Contenido/vendor/modernizr/modernizr.js"></script>
+            <script src="../Content/Contenido/javascripts/theme.js"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+            <script src="~/JAVASCRIPT/UsuariosAlta.js"></script>
+            <script src="~/JAVASCRIPT/SelectOption.js"></script>         
+        </div>
+    </body>
+</html>
+}

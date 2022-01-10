@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PROAGROModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstados" />
+          </Key>
+          <Property Name="idEstados" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Abreviacion" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Georreferencias">
+          <Key>
+            <PropertyRef Name="idGeorreferencia" />
+          </Key>
+          <Property Name="idGeorreferencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="Latitud" Type="float" Nullable="false" />
+          <Property Name="Longitud" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'PROAGRO.PROAGRO.Permisos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Permisos">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idEstado" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contraseña" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="datetime" Nullable="false" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Georreferencias_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Georreferencias" Type="Self.Georreferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstados" />
+            </Principal>
+            <Dependent Role="Georreferencias">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstados" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Permisos" Type="Self.Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spAgregarPermiso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO">
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+          <Parameter Name="idEstado" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spAgregarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO">
+          <Parameter Name="Contraseña" Type="nvarchar" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha_Nacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="RFC" Type="nvarchar" Mode="In" />
+          <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spListaEstados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO" />
+        <Function Name="spListaGeorreferencias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO" />
+        <Function Name="spListaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO" />
+        <Function Name="spUbicacionesGeorreferenciasPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PROAGRO">
+          <Parameter Name="usuario" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PROAGROModelStoreContainer">
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="PROAGRO" store:Type="Tables" />
+          <EntitySet Name="Georreferencias" EntityType="Self.Georreferencias" Schema="PROAGRO" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="PROAGRO" store:Type="Tables" />
+          <EntitySet Name="Permisos" EntityType="Self.Permisos" store:Type="Tables" store:Schema="PROAGRO">
+            <DefiningQuery>SELECT 
+    [Permisos].[idUsuario] AS [idUsuario], 
+    [Permisos].[idEstado] AS [idEstado], 
+    [Permisos].[fecha] AS [fecha]
+    FROM [PROAGRO].[Permisos] AS [Permisos]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Georreferencias_Estados" Association="Self.FK_Georreferencias_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Georreferencias" EntitySet="Georreferencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_Estados" Association="Self.FK_Permisos_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_Usuarios" Association="Self.FK_Permisos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PROAGROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstados" />
+          </Key>
+          <Property Name="idEstados" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Abreviacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Georreferencias" Relationship="Self.FK_Georreferencias_Estados" FromRole="Estados" ToRole="Georreferencias" />
+          <NavigationProperty Name="Permisos" Relationship="PROAGROModel.FK_Permisos_Estados" FromRole="Estados" ToRole="Permisos" />
+        </EntityType>
+        <EntityType Name="Georreferencias">
+          <Key>
+            <PropertyRef Name="idGeorreferencia" />
+          </Key>
+          <Property Name="idGeorreferencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="Latitud" Type="Double" Nullable="false" />
+          <Property Name="Longitud" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Estados" Relationship="Self.FK_Georreferencias_Estados" FromRole="Georreferencias" ToRole="Estados" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RFC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACTIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Permisos" Relationship="PROAGROModel.FK_Permisos_Usuarios" FromRole="Usuarios" ToRole="Permisos" />
+        </EntityType>
+        <Association Name="FK_Georreferencias_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Georreferencias" Type="Self.Georreferencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstados" />
+            </Principal>
+            <Dependent Role="Georreferencias">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PROAGROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estados" EntityType="Self.Estados" />
+          <EntitySet Name="Georreferencias" EntityType="Self.Georreferencias" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_Georreferencias_Estados" Association="Self.FK_Georreferencias_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Georreferencias" EntitySet="Georreferencias" />
+          </AssociationSet>
+          <FunctionImport Name="spListaGeorreferencias" ReturnType="Collection(PROAGROModel.spListaGeorreferencias_Result)" />
+          <FunctionImport Name="spUbicacionesGeorreferenciasPorUsuario" ReturnType="Collection(PROAGROModel.spUbicacionesGeorreferenciasPorUsuario_Result)">
+          <Parameter Name="usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spListaEstados" ReturnType="Collection(PROAGROModel.spListaEstados_Result)" />
+          <FunctionImport Name="spAgregarUsuario">
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Fecha_Nacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="ACTIVO" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="Permisos" EntityType="PROAGROModel.Permisos" />
+          <AssociationSet Name="FK_Permisos_Estados" Association="PROAGROModel.FK_Permisos_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permisos_Usuarios" Association="PROAGROModel.FK_Permisos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Permisos" EntitySet="Permisos" />
+          </AssociationSet>
+          <FunctionImport Name="spAgregarPermiso">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="idEstado" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spListaUsuarios" ReturnType="Collection(PROAGROModel.spListaUsuarios_Result)" />
+          </EntityContainer>
+        <ComplexType Name="spListaGeorreferencias_Result">
+          <Property Type="Int32" Name="idGeorreferencia" Nullable="false" />
+          <Property Type="Int32" Name="idEstado" Nullable="false" />
+          <Property Type="Double" Name="Latitud" Nullable="false" />
+          <Property Type="Double" Name="Longitud" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spUbicacionesGeorreferenciasPorUsuario_Result">
+          <Property Type="Int32" Name="idUsuario" Nullable="false" />
+          <Property Type="Int32" Name="idEstado" Nullable="false" />
+          <Property Type="Int32" Name="idUsuario_USUARIO" Nullable="false" />
+          <Property Type="String" Name="Contraseña" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre_USUARIO" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <Property Type="Int32" Name="idEstados" Nullable="false" />
+          <Property Type="String" Name="Nombre_ESTADOS" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Abreviacion" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="idGeorreferencia" Nullable="false" />
+          <Property Type="Int32" Name="idEstado_GEORREFERENCIAS" Nullable="false" />
+          <Property Type="Double" Name="Latitud" Nullable="false" />
+          <Property Type="Double" Name="Longitud" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spListaEstados_Result">
+          <Property Type="Int32" Name="idEstados" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Abreviacion" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <EntityType Name="Permisos">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idEstado" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Estados" Relationship="PROAGROModel.FK_Permisos_Estados" FromRole="Permisos" ToRole="Estados" />
+          <NavigationProperty Name="Usuarios" Relationship="PROAGROModel.FK_Permisos_Usuarios" FromRole="Permisos" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Permisos_Estados">
+          <End Type="PROAGROModel.Estados" Role="Estados" Multiplicity="1" />
+          <End Type="PROAGROModel.Permisos" Role="Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstados" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permisos_Usuarios">
+          <End Type="PROAGROModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="PROAGROModel.Permisos" Role="Permisos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Permisos">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spListaUsuarios_Result">
+          <Property Type="Int32" Name="idUsuario" Nullable="false" />
+          <Property Type="String" Name="Contraseña" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Nacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PROAGROModelStoreContainer" CdmEntityContainer="PROAGROEntities">
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="PROAGROModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="idEstados" ColumnName="idEstados" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Georreferencias">
+            <EntityTypeMapping TypeName="PROAGROModel.Georreferencias">
+              <MappingFragment StoreEntitySet="Georreferencias">
+                <ScalarProperty Name="idGeorreferencia" ColumnName="idGeorreferencia" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="PROAGROModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spListaGeorreferencias" FunctionName="PROAGROModel.Store.spListaGeorreferencias">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PROAGROModel.spListaGeorreferencias_Result">
+                <ScalarProperty Name="idGeorreferencia" ColumnName="idGeorreferencia" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUbicacionesGeorreferenciasPorUsuario" FunctionName="PROAGROModel.Store.spUbicacionesGeorreferenciasPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PROAGROModel.spUbicacionesGeorreferenciasPorUsuario_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idUsuario_USUARIO" ColumnName="idUsuario_USUARIO" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Nombre_USUARIO" ColumnName="Nombre_USUARIO" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="idEstados" ColumnName="idEstados" />
+                <ScalarProperty Name="Nombre_ESTADOS" ColumnName="Nombre_ESTADOS" />
+                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+                <ScalarProperty Name="idGeorreferencia" ColumnName="idGeorreferencia" />
+                <ScalarProperty Name="idEstado_GEORREFERENCIAS" ColumnName="idEstado_GEORREFERENCIAS" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spListaEstados" FunctionName="PROAGROModel.Store.spListaEstados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PROAGROModel.spListaEstados_Result">
+                <ScalarProperty Name="idEstados" ColumnName="idEstados" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Abreviacion" ColumnName="Abreviacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAgregarUsuario" FunctionName="PROAGROModel.Store.spAgregarUsuario" />
+          <EntitySetMapping Name="Permisos">
+            <EntityTypeMapping TypeName="PROAGROModel.Permisos">
+              <MappingFragment StoreEntitySet="Permisos">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAgregarPermiso" FunctionName="PROAGROModel.Store.spAgregarPermiso" />
+          <FunctionImportMapping FunctionImportName="spListaUsuarios" FunctionName="PROAGROModel.Store.spListaUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PROAGROModel.spListaUsuarios_Result">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

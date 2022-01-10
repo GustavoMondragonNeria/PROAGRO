@@ -1,0 +1,66 @@
+﻿@using ServicioWebDominio
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Layout_PROAGRO</title>
+</head>
+<body>
+    <div>
+        <!-- start: header -->
+        <header class="header">
+            <div class="logo-container">
+                <a href="/ExamenCliente/Index" class="logo">
+                    <img src="~/Imagenes/PROAGRO.png" height="35" />PROAGRO
+                </a>
+                <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-collapsed" data-fire-event="sidebar-left-collapsed">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <!-- start: search & user box -->
+            <div class="header-right">
+
+                <form action="pages-search-results.html" class="search nav-form">
+                    <div class="input-group input-search">
+                        <!-- <input type="text" class="form-control" name="q" id="q" placeholder="Search...">-->
+                        <span class="input-group-btn">
+                            <!--<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
+                        </span>
+                    </div>
+                </form>
+
+                <span class="separator"></span>
+               
+
+                <span class="separator"></span>
+
+                <div id="userbox" class="userbox">
+                    <figure class="profile-picture">
+                        <img src="~/Imagenes/PROAGRO.png" alt="Joseph Doe" class="img-circle" />
+                    </figure>
+                    <div class="profile-info">
+                        @{
+                            UsuarioExt e = (UsuarioExt)Session["User"];
+                            <span title="CERRAR SESIÓN" class="name"><a href="@Url.Action("LogOut", "ExamenCliente")"><i class="fa fa-power-off"></i>@e.Nombre</a></span>
+                            <span class="role">USUARIO</span>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- end: search & user box -->
+        </header>
+
+        <!-- end: header -->
+    </div>
+
+</body>
+</html>

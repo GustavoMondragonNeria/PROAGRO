@@ -1,0 +1,12 @@
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\ServiciosWebDatos.dll.config
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\ServiciosWebDatos.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\ServiciosWebDatos.pdb
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\EntityFramework.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\EntityFramework.xml
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\obj\Debug\ServiciosWebDatos.csproj.CoreCompileInputs.cache
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\obj\Debug\ServiciosWebDatos.csproj.CopyComplete
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\obj\Debug\ServiciosWebDatos.dll
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\obj\Debug\ServiciosWebDatos.pdb
+C:\Users\gusta\source\repos\SolServicioApiRest\ServiciosWebDatos\obj\Debug\ServiciosWebDatos.csproj.AssemblyReference.cache
